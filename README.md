@@ -1,1 +1,1 @@
-# AfternoonGameDesign
+# AM_GameDesign
