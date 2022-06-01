@@ -10,7 +10,7 @@ os.system ('cls')
 (Num2)=12
 answer=(Num1+Num2)
 #Operators +,-,*,/
-print (Num1+Num2)
+print the addition of ',Num1,'and', Num2, 'is', answer
 print (Num1) #after each print it makes a return
 print (Num2, end= '')
 print (answer)
