@@ -3,4 +3,8 @@ os. system ('cls')
 weight= float(input ('input your weight')) 
 height= float(input ('input your height'))
 BMI = weight/(height*height) *703 
+if (BMI >= 18.5):
+    print ("you are oberweight")
+if (BMI <= 18.5):
+    print ("you are underweight")
 print (BMI)
