@@ -1,0 +1,13 @@
+
+import os
+os.system("cls")
+#Write a code that find if the number input by the user is even or odd
+n=6
+if (n%2==0):
+    print(n,"is even number")
+else: 
+    print(n, "is odd number")
+#Finding if the number is multiple of 3 or 5
+num=27
+def getMultiples(num, number_of_multiples):
+    getMultiples(3, 5);
