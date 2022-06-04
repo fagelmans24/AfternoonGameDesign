@@ -18,10 +18,11 @@ print (message [5], end= '')
 print (message [6])
 message="JaSonAy"
 #want Son
-print (message [2], end='')
-print (message [3], end='')
-print (message [4])
-#This is a strign practice using appended a new string in the middle of a given string
+str1="JaSonAy"
+print(str1[int(len(str1)/2) - 1], end = "")
+print(str1[int(len(str1)/2)], end = "")
+print(str1[int(len(str1)/2) + 1])
+#This is a string practice using appended a new string in the middle of a given string
 s1= 'Ault'
 s2= 'Kelly'
 word= s1[0:int(len( s1)/2)] +s2 +s1[int(len( s1)/2):int(len ( s1))]
