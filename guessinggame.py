@@ -54,6 +54,7 @@ def option3 ():
             print("Wrong fruit, try again!")
         cnt+=1 
     print('You guessed it in',cnt,'tries')
+    
   
 
 while Game: #starts loop
