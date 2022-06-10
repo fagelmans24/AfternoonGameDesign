@@ -82,10 +82,10 @@ def createguesssinggame(range, tries): # this function creates the guessing game
             break
         if player_guess != random_number:
             if player_guess > random_number:
-                print("Your guess is greater than the number")
+                print("Your guess is too high")
                 print("you have " + str(tries-cnt) + " tries left")  
             else:
-                print("Your guess is less than the number ")    
+                print("Your guess is too low ")    
                 print("you have " + str(tries-cnt) + " tries left")            
     return score  
 
@@ -143,7 +143,7 @@ while Game: #starts loop
         score = createguesssinggame(50,8)
         if score>Highscore:
             Highscore=score
-        input('Press enter 5to go back to menu: ')
+        input('Press enter to go back to menu: ')
     if choice==4:
         os.system('cls')
         score = createguesssinggame(100,10)
@@ -155,27 +155,10 @@ while Game: #starts loop
             print(scoreboard())
             input('Press enter to go back to Menu')
 
-            # #files
-            # date=datetime.datetime.now()
-            # scrLine=str(high)+"\t "+name + "\t"+date.strftime("%m-%d-%Y")+ "\n"
-            # scrLine2=str(two)+"\t "+name + "\t"+date.strftime("%m-%d-%Y")+ "\n"
-            # scrLine3=str(three)+"\t "+name + "\t"+date.strftime("%m-%d-%Y")+ "\n"
-            # scrLine4=str(four)+"\t "+name + "\t"+date.strftime("%m-%d-%Y")+ "\n"
-            # scrLine5=str(five)+"\t "+name + "\t"+date.strftime("%m-%d-%Y")+ "\n"
-            # myFile=open("scre.txt", 'w')
-            # myFile.write(scrLine+scrLine2+scrLine3+scrLine4+scrLine5)
-            # myFile.write(scrLine)
-            # myFile.close()
-            # myFile=open("scre.txt", 'r') #opens a file to read # lines=myFile.readlines() #need to read entire file
-            # print()
-            # for line in myFile.readlines():
-            #  print(line)
-            # myFile.close()
 
 date = datetime.datetime.now()
-scrLile=str(Highscore)+"\n"
-# "\t"+date.strftime('%m / %d/ %y')+"\t"+name +
-myFile=open("python folder/numberscore.txt", 'a')
+scrLile=str(Highscore)+  "\t"+date.strftime('%m / %d/ %y')+"\t"+name +"\n"
+myFile=open("C:\\Users\\FagelmanS24\\OneDrive - Greenhill School\\Desktop\\Game Design\\AfternoonGameDesign\\python folder\\NumberGamescre.txt", 'a')
 myFile.write(scrLile) # adds the score to the game
 myFile.close()  
 
