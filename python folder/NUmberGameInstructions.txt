@@ -1,0 +1,6 @@
+(Welcome to this game!
+There are three possible levels to choose from:
+Level 1 is guessing a number between 1-25. Level 2 is guessing a number from 1-50 and level 3 is from 1-100.
+The higher the level and less guesses it takes you to guess the correct number, the higher your score will be!
+After each guess, you will be told whether your guess is greater or less than the correct number.
+Good luck!!
