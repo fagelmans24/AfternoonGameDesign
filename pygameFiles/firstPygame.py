@@ -7,14 +7,16 @@ import pygame, time
 pygame.init() #initialize the pygame package
 WIDTH=700 #like a constant 
 HEIGHT=700
+colors={"white":(255,255,255),"pink":(255,0,255), "blue":(0,0,255),"limeGreen":(153,255,51)
 #create display window with anyname you like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) #set_mode is how big you want the thing
 pygame.display.set_caption("My First Game") #changes the title of my window
-greenClr=(0,255,0)
-purpleClr=(125,0,125)
-# screen.fill(greenClr)
-# pygame.display.update()
-# pygame.time.delay(2000)
+clr=colors.get('limeGreen')
+# greenClr=(0,255,0)
+# purpleClr=(125,0,125)
+# # screen.fill(greenClr)
+# # pygame.display.update()
+# # pygame.time.delay(2000)
 redClr=(255,0,0) #only want red (rgb)
 hb=50
 wb=50

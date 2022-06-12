@@ -44,7 +44,7 @@ def printinstructions():
 
 
 def scoreboard(): # this function displays the top 5 scores
-    myFile = open("python folder/NumberGamescre.txt","r")
+    myFile = open("python folder/NumberGamescre.txt","r") #this opens another file to list all the highscores
     score = myFile.readlines()
     score.sort(reverse=True)
     myFile.close()
@@ -56,14 +56,14 @@ def scoreboard(): # this function displays the top 5 scores
             break
 
 
-def createguesssinggame(range, tries): # this function creates the guessing game #
+def createguesssinggame(range, tries): # this function creates the guessing game #the range is how much between max and min number of that string
     random_number = random.randint(1, range)
-    cnt = 0
-    score = 0
+    cnt = 0 #cnt is the amount of tries it takes the user to get the correct number
+    score = 0 
     while cnt < tries: 
         cnt +=1       
         while True:
-            player_guess = input("Enter a number between 1 and "+str(range)+": ")
+            player_guess = input("Enter a number between 1 and "+str(range)+": ") 
             try:
                 player_guess = int(player_guess)
                 if player_guess > 0 and player_guess < range+1:
@@ -97,6 +97,7 @@ name=input ('What is your name?' )
 input('Press enter to go to the main menu.' )
 while Game: #starts loop
     
+    #menu
     os.system ('cls')
     print('Menu:')
     print('   ')
@@ -132,11 +133,11 @@ while Game: #starts loop
 
         
 
-    if choice==2: #if the user chooses to play game 2 #highest number to choose from
-        os.system('cls')
-        score = createguesssinggame(25,6)
+    if choice==2: #if the user chooses to play game 2 
+        os.system('cls') #clears everything before
+        score = createguesssinggame(25,6) #means in this game the range is 25 and you can have 6 tries to guess the right number
         input("Press enter to go back to menu: ")
-        if score>Highscore:
+        if score>Highscore: #if the score is better than their current highschore, then the new score becomes their highscore 
             Highscore=score
     if choice==3:
         os.system('cls')
@@ -152,7 +153,7 @@ while Game: #starts loop
         input("Press enter to go back to menu: ")
             
     if choice==5: #takes them to see their score
-            print(scoreboard())
+            print(scoreboard()) 
             input('Press enter to go back to Menu')
 
 
