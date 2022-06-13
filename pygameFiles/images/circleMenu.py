@@ -11,20 +11,6 @@
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
-
-#Maria Suarez
-#6/9/2022
-#We are learning pygame basic functins, 
-# creating screens, clrs, shape ,move 
-# move  the square
-# K_UP                  up arrow
-# K_DOWN                down arrow
-# K_RIGHT               right arrow
-# K_LEFT                left arrow
-#picture = pygame. image. load(filename)
-#picture = pygame. transform. scale(picture, (1280, 720))
-#bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
-
 import pygame, time,os,random, math
 pygame.init()#initialize the pygame package
 
