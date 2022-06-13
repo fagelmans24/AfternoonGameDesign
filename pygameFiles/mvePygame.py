@@ -1,51 +1,38 @@
-#Susie Fagelman
+#Susie fagelman
 #6/9/2022
-#We are learning pygame basic functions
-#creating screens, clrs, shape
-# #K_UP                  up arrow
+#We are learning pygame basic functins, 
+# creating screens, clrs, shape ,move 
+# move  the square
+# K_UP                  up arrow
 # K_DOWN                down arrow
 # K_RIGHT               right arrow
 # K_LEFT                left arrow
-# K_INSERT              insert
+#picture = pygame. image. load(filename)
+#picture = pygame. transform. scale(picture, (1280, 720))
+#bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
-import squrt
-from msvcrt import kbhit
-from random import random
-from turtle  import speed, width 
-import random
-import pygame, time, os
-pygame.init() #initialize the pygame package
-colors={"white":(255,255,255),"pink":(255,0,255), "blue":(0,0,255),"limeGreen":(153,255,51)}
-WIDTH=700 #like a constant 
+import pygame, time,os
+pygame.init()#initialize the pygame package
+os.system('cls')
+WIDTH=700 #like constant
 HEIGHT=700
-#create display window with anyname you like
-screen=pygame.display.set_mode((WIDTH,HEIGHT)) #set_mode is how big you want the thing
-pygame.display.set_caption("My First Game") #changes the title of my window
-clr=colors.get('limeGreen')
-# greenClr=(0,255,0)
-# purpleClr=(125,0,125)
-# # screen.fill(greenClr)
-# # pygame.display.update()
-pygame.time.delay(2000)
+colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51)}
+clr=colors.get("limeGreen")
+#create dispay wind with any name y like
+screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
+pygame.display.set_caption("My First Game")  #change the title of my window
+#square Var
 hb=50
 wb=50
 xb=100
 yb=300
-
-cx=350
-cy=350
-speed=2
-ibox= rad*math.squrt
-
-square=(xb,yb,wb,hb)
-squareClr=colors.get("pink") #creates the object to draw
-# screen.fill(redClr)
-# pygame.display.update()
-# pygame.time.delay(2000)
+square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
+squareClr=colors.get("pink")
+#keep running create a lp
 circleClr=colors.get("blue")
-#if i want this to keep running create a loop
-backgrnd=colors.get('limeGreen')
-run=True
+backgrnd=colors.get("limeGreen")
+run = True
+#create var mve
 speed=2
 cx=350
 cy=350
@@ -55,42 +42,20 @@ while run:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             run=False
-            print('You quit')
-        #rect(screen, redClr,square) ->
+            print("Y quit")
     keys= pygame.key.get_pressed() #this is a list
     if keys[pygame.K_RIGHT] and square.x < WIDTH -(wb):
-        square.x +=speed
-    if keys [pygame.K_LEFT] and square.x > speed:
+        square.x += speed
+    if keys[pygame.K_LEFT] and  square.x > speed:
         square.x -= speed
-    if keys[pygame.K_UP] and square.y >speed:
+    if keys[pygame.K_UP] and square.y >speed:   #means clser t 0
         square.y -= speed
-    if keys[pygame.K_DOWN] and square.y <HEIGHT -hb:
-        square.y +=speed
-    #move circle
-    if keys[pygame.K_d] and cx <WIDTH -(rad):
-        cx+= speed 
-        insSquare.x += speed
-    if keys[pygame.K_a] and cx >(speed+rad):
-        cx += speed
-        insSquare.x += speed
-    if keys [pygame.K_w] and cy >(speed+rad):
-        cy -= speed
-        insSquare.y +=speed
-    if keys [pygame.K_s] and cy <HEIGHT-(rad):
-        cy += speed
-        insSquare.y +=speed
-    if square.colliderect(insSquare):
-        print("BOOM")
-         rad +=1
-
-        cx=random.randit(rad,WIDTH-rad)
-        cy=random.randit(rad,HEIGHT-rad)
-       
-    ibox= rad*math.squrt(2)
-    xig = cx-(ibox/2)
-    yig =cy-(ibox/2)
-
+    if keys[pygame.K_DOWN] and square.y <HEIGHT -hb:  #means clser t max value HEIGHT
+        square.y += speed
+    
+    #rect(surface, color, rect) -> Rect
     pygame.draw.rect(screen, squareClr,square)
-    pygame.draw.circle(screen,circleClr, (cx,cy),rad)
-    pygame.draw.rect(screen, squareClr, insSquare)
+    #circle(surface, color, center, radius)
+    pygame.draw.circle(screen, circleClr, (cx,cy), rad)
     pygame.display.update()
+    pygame.time.delay(2)
