@@ -58,3 +58,4 @@ while run:
     #circle(surface, color, center, radius)
     pygame.draw.circle(screen, circleClr, (cx,cy), rad)
     pygame.display.update()
+    pygame.time.delay(2)
