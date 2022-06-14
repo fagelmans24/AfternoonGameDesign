@@ -85,12 +85,12 @@ def menu():
     xd = WIDTH//2 - (Title.get_width()//2)
     screen.blit(Title, (xd, 100))
 
-    Button_1 = pygame.Rect(400, 400, 100, 50)
-    Button_2 = pygame.Rect(200, 350, 100, 50)
-    Button_3 = pygame.Rect(400, 300, 100, 50)
-    Button_4 = pygame.Rect(400, 250, 100, 50)
-    Button_5 = pygame.Rect(400, 200, 100, 50)
-    Button_6 = pygame.Rect(400, 150, 100, 50)
+    Button_1 = pygame.Rect(30, 145, 150, 50)
+    Button_2 = pygame.Rect(30, 195, 150, 50)
+    Button_3 = pygame.Rect(30, 245, 150, 50)
+    Button_4 = pygame.Rect(30, 295, 150, 50)
+    Button_5 = pygame.Rect(30, 345, 150, 50)
+    Button_6 = pygame.Rect(30, 395, 150, 50)
     pygame.draw.rect(screen, colors.get("limeGreen"), Button_1)
     pygame.draw.rect(screen, colors.get("limeGreen"), Button_2)
     pygame.draw.rect(screen, colors.get("limeGreen"), Button_3)
@@ -174,7 +174,7 @@ def Instructions():
                 mx = mousePos[0]
                 my = mousePos[1]
                 if Button_1.collidepoint((mx, my)):
-                    return True
+                    menu ()
                 if Button_2.collidepoint((mx, my)):
                     return False
 
