@@ -115,7 +115,7 @@ def menu():
                 mx = mousePos[0]
                 my = mousePos[1]
                 if Button_1.collidepoint((mx, my)):
-                    Instructions()
+                    return Instructions()
                 if Button_2.collidepoint((mx, my)):
                     return False
                 if Button_3.collidepoint((mx, my)):
@@ -174,7 +174,7 @@ def Instructions():
                 mx = mousePos[0]
                 my = mousePos[1]
                 if Button_1.collidepoint((mx, my)):
-                    menu ()
+                    return True
                 if Button_2.collidepoint((mx, my)):
                     return False
 
