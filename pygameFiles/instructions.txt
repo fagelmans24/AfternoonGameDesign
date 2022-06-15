@@ -1,6 +1,4 @@
 In this game we need to use 
 the arrow keys to move the square
 To move the circle use W,A,S and D
- 
-
- Are you ready to play?
+Press x to go back to menu 
