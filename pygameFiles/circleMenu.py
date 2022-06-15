@@ -26,6 +26,7 @@ WIDTH=700 #like constant
 HEIGHT=700
 TITLE_FONT = pygame.font.SysFont('comicsans', WIDTH//20)
 MENU_FONT = pygame.font.SysFont('comicsans', WIDTH//22)
+screen=pygame.display.set_mode
 
 
 colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51)}
