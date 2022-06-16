@@ -226,6 +226,8 @@ def settings ():
                 if Button_Sizedecrease.collidepoint(mx, my) and WIDTH >500:
                     WIDTH -=100
                     screen= pygame.display.set_mode((WIDTH,HEIGHT))
+            pygame.display.update()
+            settings()
                 
                     
                 
