@@ -246,7 +246,7 @@ def Game_1 ():
                 my = mousePos[1]
                 # print(mousePos)
         
-        pygame.draw.rect((screen, backgrnd), mountainSqaure)
+        pygame.draw.rect(screen, backgrnd, mountainSqaure)
         screen.blit(bg, (0,0))
         keys= pygame.key.get_pressed() #this is a list
         #mve square
