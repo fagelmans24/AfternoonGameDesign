@@ -646,22 +646,21 @@ def play_again():
     while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
+                print("go back to menu")
+            #creating buttons to play again
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousePos = pygame.mouse.get_pos()
                 mx = mousePos[0]
                 my = mousePos[1]
                 if Button_yes.collidepoint((mx, my)):
                     return True
-                if Button_no.collidepoint((mx, my)):
-                    
+                if Button_no.collidepoint((mx, my)): 
                     screen.fill("purple")
                     goodbye_text = MENU_FONT.render("Thanks for playing!", 1, colors.get("BLACK"))
                     goodbye_text_X = WIDTH//2 - (goodbye_text.get_width()//2)
                     screen.blit(goodbye_text, (goodbye_text_X, 350))
-                    score_message = "X won "+str(x_wins)+" games and O won "+str(o_wins)+" games"
+                    #score
+                    score_message = "X won "+str(x_wins)+" games and O won "+str(o_wins)+" games!"
                     print(score_message)
                     Score_Show = MENU_FONT.render(score_message, 1, colors.get("BLACK"))
                     Score_Show_X = WIDTH//2 - (Score_Show.get_width()//2)
@@ -669,7 +668,8 @@ def play_again():
                     pygame.display.update()
                     pygame.time.delay(4000)
                     pygame.quit()
-                    sys.exit()   
+                    sys.exit() 
+                    #go to menu  
            
                 
 
@@ -724,10 +724,10 @@ while True:
         x_pOs=0
         
         for x in markers:
-            if sum(x)==3:
+            if sum(x)==3:   #if all add up to 3 that means x wins
                     winner=1
                     gameOver=True
-            if sum(x)==-3:
+            if sum(x)==-3:  #if -3 o wins
                 winner = -1
                 gameOver=True
             if markers[0][x_pOs]+markers[1][x_pOs]+markers[2][x_pOs]==3:
@@ -763,6 +763,7 @@ while True:
     def gameEnd():
         global Game, x_wins, o_wins
         zero_Array()
+        #showing who wins
         if winner==1:
             x_wins+=1
             text='X won!'
