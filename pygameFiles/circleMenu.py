@@ -628,22 +628,22 @@ char = pygame.transform.scale(char, (50, 50))
 # pygame.display.update()
 # pygame.time.delay(5000)
 
-#square Var
+#square variables
 hb=50
 wb=50
 xb=100
 yb=300
 
-#character vars
+#character variables
 charx = xb
 chary = yb
 
-#circle
+#circle variables
 cx=350
 cy=350
 rad=25
 
-#inscribed box
+#inscribed box variables
 ibox = rad*math.sqrt(2)
 xig = cx-(ibox/2)
 yig = cy-(ibox/2)
@@ -657,7 +657,7 @@ square=pygame.Rect(xb,yb,wb,hb)
 insSquare=pygame.Rect(xig,yig,ibox,ibox)
 mountainSqaure = pygame.Rect(250, 320, 180, 250)
 
-#collors
+#defined colors
 squareClr=colors.get("pink")
 circleClr=colors.get("blue")
 backgrnd=colors.get("white")
@@ -672,61 +672,7 @@ clock= pygame.time.Clock()
 #Menu items
 message = ["Instructions", "Setting", "Game 1", "Game 2", "Scoreboard", "Exit"]
 
-def enterName():
-    backgrndClr=(255,255,255)
-    clock=pygame.time.Clock
-    WIDTH=600
-    HEIGHT=600
-    screen=pygame.display. set_mode((WIDTH,HEIGHT))
-    pygame.display.set_caption("Get Name")
-    screen.fill(backgrndClr)
-
-    run=True #run the while loop
-    user_name=''
-    nameClr=(0,125,125) #text for the name
-    bxClr= (200,200,200) #text b   
-
-    TITLE_FONT = pygame.font.SysFont('comicsans', WIDTH//40)
-    MENU_FONT = pygame.font.SysFont('comicsans', WIDTH//25)
-
-    title=TITLE_FONT.render("enter Name" ,1, bxClr)
-    colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51)}
-    screen.blit(title,(200,50))
-    Bx=WIDTH//3
-    input_Rectx= WIDTH//2 - WIDTH//4
-    input_Rect= pygame.Rect(WIDTH//3, HEIGHT//3, 140, 32)
-    pygame.draw.rect(screen, colors.get("limeGreen"), input_Rect)
-    pygame.display.update()
-
-    run=True
-    while run:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                #Menu(mainTitle,messageMenu)
-                pygame.quit()
-                sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos= pygame.mous.get_pos()
-                mx= mousePos[0]
-                my=mousePos[1]
-                
-            if event.type==pygame.KEYDOWN:  
-                if event.type==pygame.K_RETURN:
-                    run=False
-                    print("Hello," + user_name)
-    
-                if event.key==pygame.K_BACKSPACE:
-                    user_name=user_name[:-1]
-                elif event.key !=pygame.K_RETURN:
-                    user_name+= event.unicode
-
-            pygame.draw.rect(screen, colors.get("limeGreen"), input_Rect)
-            user_text = MENU_FONT.render(user_name,1, colors.get("pink"))
-            screen.blit(user_text, (input_Rectx + 20, 410))
-            pygame.display.update()       # updates the screen
-
-            # clock.tick(60) #run every second
+#enetring name at the beginning
 
 def menu():
     Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
@@ -868,7 +814,63 @@ def settings ():
             settings()
                 
                 
+def enterName():
+    # name variable
+    user_name = ""
 
+    #rendering text objects
+
+    Title = TITLE_FONT.render("Input your name", 1, colors.get("blue"))
+    text1 = MENU_FONT.render("enter your name in the green box", 1, colors.get("blue"))
+    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
+
+    #fills screen with white
+    screen.fill(colors.get("white"))
+
+
+    # renderig fonts to the screen
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))
+    # text1_x = WIDTH//2 - (text1.get_width()//2)
+    # screen.blit(text1, (text1_x, 350))
+
+    # creats the box for typing
+    input_Rect = WIDTH//2 - WIDTH//4
+    input_Rectx = pygame.Rect(input_Rect, 400, WIDTH//2, 50)
+    pygame.draw.rect(screen, colors.get("limeGreen"), input_Rectx)
+    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
+    screen.blit(user_text, (input_Rect + 20, 410))
+    pygame.display.update()
+        
+    run = True    
+    while run:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                #Menu(mainTitle,messageMenu)
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mousePos= pygame.mouse.get_pos()
+                mx= mousePos[0]
+                my=mousePos[1]
+                
+            if event.type==pygame.KEYDOWN:  
+                if event.type==pygame.K_RETURN:
+                    run=False
+                    print("Hello," + user_name)
+    
+                if event.key==pygame.K_BACKSPACE:
+                    user_name=user_name[0:len(user_name)-1]
+                elif event.key !=pygame.K_RETURN:
+                    user_name+= event.unicode
+
+                pygame.draw.rect(screen, colors.get("limeGreen"), input_Rect)
+                user_text = MENU_FONT.render(user_name,1, colors.get("pink"))
+                screen.blit(user_text, (input_Rectx + 20, 410))
+                pygame.display.update()       # updates the screen
+
+                # clock.tick(60) #run every second
 def Game_1 ():
     global run, insSquare, charx, chary, cx, cy, rad
     while run:
@@ -1197,6 +1199,5 @@ def game2():
                     
             pygame.display.update() 
  
-
 enterName()
 menu ()
