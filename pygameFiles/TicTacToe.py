@@ -664,48 +664,48 @@ def draw_Markers():
 
 def checkWinner():
     global markers, Gameover, winner
-    winner = 0  #check for a tie
-    length = len(markers) # checks for the number of rows
+    winner = 0  #Checking for a tie
+    length = len(markers) # Checing for rows
     for x in range(length):
         # These are for if X won because X=1
-        if (markers[x][0] + markers[x][1] + markers[x][2]) == 3: # checks rows
+        if (markers[x][0] + markers[x][1] + markers[x][2]) == 3: #rows
             winner = 1
             Gameover = True
-        if (markers[0][x] + markers[1][x] + markers[2][x]) == 3: #checks cols
+        if (markers[0][x] + markers[1][x] + markers[2][x]) == 3: #columns
             winner = 1
             Gameover = True
-    if (markers[0][0] + markers[1][1]+ markers[2][2]) == 3: # checks diagnal
+    if (markers[0][0] + markers[1][1]+ markers[2][2]) == 3: #diagnal
         winner = 1
         Gameover = True
-    if (markers[2][0]+markers[1][1] +markers[0][2]) == 3: # checks other diagnal
+    if (markers[2][0]+markers[1][1] +markers[0][2]) == 3: #diagnal
         winner = 1 
         Gameover = True
 
         # These are for if O won because O=-1
     for x in range(3):
-        if (markers[x][0] + markers[x][1] + markers[x][2]) == -3: # checks rows
+        if (markers[x][0] + markers[x][1] + markers[x][2]) == -3: #rows
             winner = -1
             Gameover = True
-        if (markers[0][x] + markers[1][x] + markers[2][x]) == -3: # checks cols
+        if (markers[0][x] + markers[1][x] + markers[2][x]) == -3: #columns
             winner = -1
             Gameover = True
-    if (markers[0][0] + markers[1][1]+ markers[2][2]) == -3: # checks diagnal
+    if (markers[0][0] + markers[1][1]+ markers[2][2]) == -3: #diagonal
         winner = -1
         Gameover = True
-    if (markers[2][0]+markers[1][1] +markers[0][2]) == -3: # checks other diagnal
+    if (markers[2][0]+markers[1][1] +markers[0][2]) == -3: #diagnal
         winner = -1 
         Gameover = True
-    if Gameover == False:
+    if Gameover == False:   #tie
         Tie = True
         for ROW in markers:
             for COL in ROW:
                 if COL == 0:
                     Tie = False
-        if Tie: #if a tie game is over
+        if Tie: #If there is a tie, the game ends
             Gameover = True
             winner = 0            
 
-    return winner    #show if X or O won
+    return winner    #Displays which player won
 
     
 def gameEnd(win): #showing score
@@ -740,7 +740,7 @@ def gameEnd(win): #showing score
         screen.blit(Score_Show, (Score_Show_X, 250))
         pygame.display.update()
         pygame.time.delay(2000)
-    if win == 0:
+    if win == 0:    #if tie
         message = "You tied!"
         screen.fill("GREEN")
         Title = TITLE_FONT.render(message, 1, colors.get("BLACK"))
@@ -750,7 +750,7 @@ def gameEnd(win): #showing score
         pygame.time.delay(1000)
         
 
-def play_again(): # this function asks the player if they want to play again
+def play_again(): # This function asks the player if they want to play again
     
     play_again_titlefont = pygame.font.SysFont('comicsans', 50)
     buttons_font = pygame.font.SysFont('comicsans', 20)
@@ -824,13 +824,13 @@ def game2():
 
         #Game Variable
         player=1 #1 is O and -1 is O
-             # Array tp Control the plays
+             # Array to control the plays
         lineWidth=10        # Line thickness
-        Game=True       # control the main game
-        Gameover=False      # checks if game is over
-        MxMy=(0,0)      # checks clicks
-        cirClr=colors.get("blue") # color for the circle
-        xClr=colors.get("BLACK") # color for the x
+        Game=True       # Controls the main game
+        Gameover=False      # Checks if game is over
+        MxMy=(0,0)      # Checks clicks
+        cirClr=colors.get("blue") # Color for the circle
+        xClr=colors.get("BLACK") # Color for the x
         markers = [] 
 
         zero_Array()
@@ -866,5 +866,5 @@ def game2():
                     
             pygame.display.update() 
  
-
+#calling function
 game2()
