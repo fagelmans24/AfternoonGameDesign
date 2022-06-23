@@ -4,7 +4,7 @@ import pygame
 import time
 pygame.init()
 
-
+# colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),}
 
 # IMAGES
 WIDTH = 500
@@ -17,22 +17,22 @@ pygame.display.set_caption("Crossy Road")
 clock = pygame.time.Clock()
 
 
-# def GameWindow():
-#     screen.blit(background, (0,0))
+def GameWindow():
+    screen.blit(background, (0,0))
     
-#     pygame.display.update()
-#     run = True
-#     while run:
-#         clock.tick(27)
+    pygame.display.update()
+    run = True
+    while run:
+        clock.tick(27)
 
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 run = False
-#         screen.fill ((0,255,0))
-#         duck_group.draw(screen)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+        screen.fill ((0,255,0))
+        duck_group.draw(screen)
 
 
-#     GameWindow()
+    GameWindow()
 
 
 def update (self):
@@ -76,8 +76,8 @@ class duck(pygame.sprite.Sprite):
         self.vel=4 #vel is the speed which the character moves #vel to speed
 
         #IMAGES
-        self. duckright = pygame.image.load('pygameFiles\images\Pygame Crossy Road\duck1.png')
-        self.duckleft  = pygame.image.load('pygameFiles\images\Pygame Crossy Road\duck2.png')
+        self. duckright = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct duck1.png')
+        self.duckleft  = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct duck2.png')
         self. duckright = pygame. transform. scale(self. duckright, (75,75))
         self. duckleft = pygame. transform. scale(self. duckleft, (75,75))
 
@@ -167,7 +167,7 @@ class Car(pygame.sprite.Sprite):
 class Screen(pygame.sprite.Sprite):
     def __init__ (self):
         super(). __init__()
-        self. image1= pygame.image.load('pygameFiles\images\Pygame Crossy Road\Scene.png')
+        self. image1= pygame.image.load('pygameFiles\images\Pygame Crossy Road\\road background.jpg')
         self. image2= pygame.image.load('pygameFiles\images\Pygame Crossy Road\You Win.png')
         self. image3 = pygame.image.load('pygameFiles\images\Pygame Crossy Road\You lose.png')
 
@@ -232,9 +232,9 @@ class Flag(pygame.sprite.Sprite):
 class Explosion(object):  
     def __init__(self)    :
         self.costume =1
-        self.width =1
-        self.height =1
-        self.image =pygame.image.load('pygameFiles\images\Pygame Crossy Road\\boom.jpg')  #explosion if series of images  
+        self.width =140
+        self.height =140
+        self.image =pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')  #explosion if series of images  
         self.image =pygame.transform.scale(self.image, (self.width, self.height))
 
     def explode(self, x,y): #x and y are ducks coordinates 
@@ -244,7 +244,7 @@ class Explosion(object):
         DeleteDuck() #calling the method
 
         while self.costume <9:
-            self.image =pygame.image.load('pygameFiles\images\Pygame Crossy Road\\boom.jpg')  #explosion if series of images  
+            self.image =pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')  #explosion if series of images  
             self.image =pygame.transform.scale(self.image, (self.width, self.height))
             screen.blit(self.image,(x,y))
             pygame.display.update()
@@ -308,9 +308,24 @@ def EndScreen(number):
     gameOn=False
     if number ==0:
         bg.image =bg.image3
+        pygame.time.delay(3000)
+
     elif number==1:
         bg.image =bg.image2
 
+def gameOver(num):
+    screen.fill((255,255,255))
+    if num==0:
+        text= ('You lost the game, do you want to play again?')
+    if num==1:
+        text= ('You won the game, do you want to play again?')
+    text=score_font.render(text, 1, (0,0,0))
+    xd=  WIDTH//2-(text.get_width()//2)
+    screen.blit(text,(xd, 50))
+    
+
+    
+    
 #VARIABLES
 
 WIDTH = 640
@@ -349,7 +364,7 @@ gameOn = True
 run =True
 while run: #main loop where we call all functions 
 
-    # GameWindow()
+    GameWindow()
     clock.tick(60)  #setting up a framerate of 60 frames per second    for event in pygame.event.get():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
