@@ -4,7 +4,7 @@
 #imports
 from itertools import count
 import pygame 
-import time, sys
+import time, sys, random, datetime
 
 #VARIABLES (declaring constants)
 WIDTH = 640
@@ -618,7 +618,7 @@ class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a 
         self.x = 50     #where duck starts off at beginning of game
         self.y = HEIGHT / 2     #centering the duck
         self.vel = 4    #setting velocity of duck   
-        self.width = 90 #width of the duck
+        self.width = 90    #width of the duck
         self.height = 50    #height of the duck
 
         # IMAGES #two duck images (one for moving right, one for moving left)
@@ -904,6 +904,12 @@ def GameOver(num):
     screen.blit(text1, (225, 410))
     screen.blit(text2, (425, 410))
     pygame.display.update() 
+
+    date = datetime.datetime.now()
+    scoreLn=str(SCORE) +"    " + user_name +"    " +date.strftime("%m/%d/%y") + "\n"    #adds an enter
+    myFile = open("scoreFile.txt", "a")
+    myFile.write (scoreLn)
+    myFile.close()
     while True:
         for event in pygame.event.get():    #if player hits x on screen it leaves program
             if event.type == pygame.QUIT:
@@ -920,8 +926,7 @@ def GameOver(num):
                     goodbye_text = MENU_FONT.render("Thanks for playing", 1, colors.get("BLACK")) # says thank you for playing
                     goodbye_text_X = WIDTH//2 - (goodbye_text.get_width()//2)
                     screen.blit(goodbye_text, (goodbye_text_X, 350))
-                    return False
-                    # menu()
+                    menu()
 
 #Need these varibales here to reference them before crossyRoad() if not there the variables wont be defined for the classes 
 bg = Screen()   #background screen
@@ -945,7 +950,216 @@ flag_group = pygame.sprite.Group()
 flag_group.add(green_flag, white_flag)
 flags = [green_flag, white_flag]    #creating a list to help hiding and showing flags
 boom = Boom()
+TITLE_FONT = pygame.font.SysFont('comicsans', 40)
+MENU_FONT = pygame.font.SysFont('comicsans', 20)
+message = ["Instructions", "Setting", "Game 1", "Scoreboard", "Exit"]
 
+backgrnd = (255,255,255)
+
+def input_name():
+    global user_name
+    # name variable
+    user_name = ""
+
+    #rendering text objects
+
+    Title = TITLE_FONT.render("Input your name:", 1, colors.get("MANDARIN_ORANGE"))
+    text1 = MENU_FONT.render("(Enter in the pink box)", 1, colors.get("SALMON"))
+    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
+
+    #fills screen with white
+    screen.fill(colors.get("white"))
+
+
+    # renderig fonts to the screen
+    xd = WIDTH//2 - (Title.get_width()//2)
+    xb = WIDTH//2 - (text1.get_width()//2)
+    screen.blit(Title, (xd, 50))
+    screen.blit(text1, (xb,100))
+    # text1_x = WIDTH//2 - (text1.get_width()//2)
+    # screen.blit(text1, (text1_x, 350))
+
+    # creats the box for typing
+    botton1 = WIDTH//2 - WIDTH//4
+    button2 = pygame.Rect(botton1, 400, WIDTH//2, 50)
+    pygame.draw.rect(screen, colors.get("DEEP_PINK,"), button2)
+
+    pygame.display.update()
+        
+    run = True    
+    while run:
+            for event in pygame.event.get(): #if they exit game ends
+                if event.type==pygame.QUIT:
+                    print(user_name)
+                    pygame.quit()
+                    sys.exit()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousePos = pygame.mouse.get_pos()
+                    mx = mousePos[0] #variables
+                    my = mousePos[1]
+                    
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key ==  pygame.K_RETURN: # Entering the users name 
+                        run = False #ends the loop
+                        print(user_name) 
+                    if event.key == pygame.K_BACKSPACE: # Removing th elast leter o their name by subtracting 1 from the length of the word
+                        user_name = user_name[0:len(user_name)-1]
+                    elif event.key != pygame.K_RETURN: # Adding the romoved character to the end of the string
+                        user_name += event.unicode 
+
+                    pygame.draw.rect(screen, colors.get("DEEP_PINK,"), button2)
+                    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
+                    screen.blit(user_text, (botton1 + 20, 410))
+                    pygame.display.update()       # Must always update the screen
+
+Bx= WIDTH//3
+#setting buttons
+Button_Color = pygame.Rect(Bx, 150, WIDTH//4, 40)
+Button_Background = pygame.Rect(Bx, 200, WIDTH//4, 40)
+Button_Sizeincrease= pygame.Rect(Bx, 250, WIDTH//4, 40)
+Button_Sizedecrease= pygame.Rect(Bx, 300, WIDTH//4, 40)
+buttoncolor= colors.get ("BLACK")
+
+#menu function
+def menu():
+    Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
+    screen.fill(backgrnd)
+    ymenu = 155
+    xd = WIDTH//2 - (Title.get_width()//2) #centering title
+    screen.blit(Title, (xd, 100))
+    #setting where the buttons will be displayed on the screen
+    Button_Instructions = pygame.Rect(30, 145, 150, 50) 
+    Button_Settings = pygame.Rect(30, 195, 150, 50)
+    Button_Game_1 = pygame.Rect(30, 245, 150, 50)
+    Button_Score = pygame.Rect(30, 295, 150, 50)
+    Button_Exit = pygame.Rect(30, 345, 150, 50)
+    #drawing the buttons
+    pygame.draw.rect(screen, buttoncolor, Button_Instructions)
+    pygame.draw.rect(screen, buttoncolor, Button_Settings)
+    pygame.draw.rect(screen, buttoncolor, Button_Game_1)
+    pygame.draw.rect(screen, buttoncolor, Button_Score)
+    pygame.draw.rect(screen, buttoncolor, Button_Exit)
+
+    for item in message: #for the words in the buttons
+        text = MENU_FONT.render(item, 1, colors.get('DARK_VIOLET'))
+        screen.blit(text, (40, ymenu))
+        pygame.display.update()
+        pygame.time.delay(50) #very short delay
+        ymenu += 50
+    
+    while True: #loop for buttons
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                run=False #making run = false to end the game
+                print("Y quit")
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mousePos = pygame.mouse.get_pos()
+                mx = mousePos[0]    #variables
+                my = mousePos[1]
+                if Button_Instructions.collidepoint((mx, my)): #if user presses instructions it displays instructions txt
+                    Instructions("Instructions" , "pygameFiles\instructions.txt")
+                if Button_Settings.collidepoint((mx, my)):
+                    settings () #calling settings function
+                if Button_Game_1.collidepoint((mx, my)):
+                    crossyRoad () #calling game function
+                if Button_Score.collidepoint((mx, my)):
+                    Instructions ("Highscores", "pygameFiles\images\Pygame Crossy Road\scoreFile.txt") #showing the score txt
+                if Button_Exit.collidepoint((mx, my)):
+                    pygame.quit () #to leave the program
+                    sys.exit ()
+                    
+
+def Instructions(TITLE, FILE):
+    #rendering text objects
+    Title = TITLE_FONT.render(TITLE, 1, colors.get("blue"))
+    
+    #fills screen with white
+    screen.fill(backgrnd)
+
+    #Instructions
+    myFile = open(FILE, "r")    #reading lines
+    content = myFile.readlines()
+
+    #variable to control change of line
+    yinstructions = 150
+    for line in content:
+        Instruc = MENU_FONT.render(line[0:-1], 1, colors.get("blue"))
+        screen.blit(Instruc, (40, yinstructions))
+        pygame.display.update()
+        pygame.time.delay(50)
+        yinstructions += 40
+
+    myFile.close()
+
+    #renderig fonts to the screen
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))
+    
+
+    pygame.display.update()
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                menu ()
+        
+                      
+def settings ():    #settings funtion
+    global WIDTH, HEIGHT, backgrnd, screen, buttoncolor #setting global so they apply to all
+    Title = TITLE_FONT.render("Crossy Road", 1, colors.get("MINT_CREAM"))
+    screen.fill(backgrnd)
+    ymenu = 155
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 100))
+    
+    Bx= WIDTH//3
+    #setting buttons
+    Button_Color = pygame.Rect(Bx, 150, WIDTH//4, 40)
+    Button_Background = pygame.Rect(Bx, 200, WIDTH//4, 40)
+    Button_Sizeincrease= pygame.Rect(Bx, 250, WIDTH//4, 40)
+    Button_Sizedecrease= pygame.Rect(Bx, 300, WIDTH//4, 40)
+    
+    #drawinf the settings buttons
+    pygame.draw.rect(screen, buttoncolor, Button_Color)
+    pygame.draw.rect(screen, buttoncolor, Button_Background)
+    pygame.draw.rect(screen, buttoncolor, Button_Sizeincrease)
+    pygame.draw.rect(screen, buttoncolor, Button_Sizedecrease)
+    
+    #variables for the different settings
+    color = MENU_FONT.render("Randomize button color", 1, colors.get("blue"))
+    bgcolor = MENU_FONT.render("Randomize background color", 1, colors.get("blue"))
+    sizeincrease = MENU_FONT.render("Increase screen size",1, colors.get ("blue"))
+    sizedecrease = MENU_FONT.render("Decrease screen size",1, colors.get ("blue"))
+
+    screen.blit(color, (WIDTH//2 - (color.get_width()//2), 160))
+    screen.blit(bgcolor, (WIDTH//2 - (bgcolor.get_width()//2), 210))
+    screen.blit(sizeincrease, (WIDTH//2 - (sizeincrease.get_width()//2), 260))
+    screen.blit(sizedecrease, (WIDTH//2 - (sizedecrease.get_width()//2), 310))
+
+    while True: #start loop in settings 
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                menu ()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mousepos = pygame.mouse.get_pos()
+                mx=mousepos[0]
+                my=mousepos[1]
+                if Button_Color.collidepoint(mx,my):
+                    buttoncolor=(random.randint(0,255),random.randint(0,255), random.randint(0,255)) #changes color
+                    
+                if Button_Background.collidepoint(mx,my):
+                    backgrnd=(random.randint(0,255),random.randint(0,255), random.randint(0,255))   #changes background color
+                if Button_Sizeincrease.collidepoint(mx, my):
+                    WIDTH+=100  #increasing size by 100 
+                    screen= pygame.display.set_mode((WIDTH,HEIGHT))
+                if Button_Sizedecrease.collidepoint(mx, my) and WIDTH >500:
+                    WIDTH -=100 #decreases size by 100
+                    screen= pygame.display.set_mode((WIDTH,HEIGHT))
+            pygame.display.update()
+            settings()  #calling function
+                
+                
 def crossyRoad ():  #calling game function
     global flags, boom, gameOn, bg, screen_group, duck, duck_group, slow_car, fast_car, car_group, green_flag, white_flag, flag_group, flags, boom    #making all variables global so they apply everywhere
     gameOn = True   #control whether the player has finished the game or if it still going on
@@ -997,6 +1211,7 @@ def crossyRoad ():  #calling game function
         screen_group.update()
 
         pygame.display.update() #updating screen so user can see changes added
-crossyRoad()
+input_name()
+menu()
 
-pygame.quit() #making pygame window close
+
