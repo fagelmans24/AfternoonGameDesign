@@ -6,8 +6,7 @@ from itertools import count
 import pygame 
 import time, sys
 
- #VARIABLES
-    #declaring constants 
+#VARIABLES (declaring constants)
 WIDTH = 640
 HEIGHT = 480
 pygame.init() #helps initialize all the modules in pygame. Gives access to many functions 
@@ -670,7 +669,7 @@ class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a 
 
     def checkCollision(self):
         car_check = pygame.sprite.spritecollide(self, car_group, False, pygame.sprite.collide_mask)
-        if car_check:
+        if car_check:   #if collision takes place, call explosion fcuntions
             boom.explode(self.x, self.y)
 
 
@@ -771,10 +770,10 @@ class Flag(pygame.sprite.Sprite):   #creating flag class
                     SwitchLevel()   #calling function if score is less than 5
 
                 else:   #white flag
-                    duck_group.empty()
+                    duck_group.empty()  #removing duck from group if player won
                     DeleteOtherItems()
 
-                    EndScreen(1)
+                    EndScreen(1)    #end screen for winner
 
             else:   #showing the opposite flag
                 green_flag.visible = True   #setting visisble
@@ -788,30 +787,31 @@ class Boom(object): #object for when car and duck hit each other
         self.image = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')  #uploading explosion when duck hits car
         self.image = pygame.transform.scale(self.image, (self.width, self.height))  #resizing image
 
-    def explode(self, x, y):
-        x = x - self.width / 2
-        y = y - self.height / 2
-        DeleteDuck()
+    def explode(self, x, y):   
+        #two perameters use has to enter in: 
+        x = x - self.width / 2  #x coordinate of duck
+        y = y - self.height / 2 #y coordinate of duck
+        DeleteDuck()    #calling function
 
-        while self.costume < 9:
-            self.image = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')
+        while self.costume < 9: #while loop to make sure costume is under 9
+            self.image = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')  #importing explode image
             self.image = pygame.transform.scale(self.image, (self.width, self.height))  
             screen.blit(self.image, (x, y))
             pygame.display.update()
 
-            self.costume += 1
-            time.sleep(0.1)
+            self.costume += 1  #making sure annimation works properly 
+            time.sleep(0.1) #delaying the time
 
-        DeleteOtherItems()
-        EndScreen(0)
+        DeleteOtherItems()  #calling this function to clear screen
+        EndScreen(0)    #calling this function so that after explosion is complete, player has lost
 
 
 def ScoreDisplay(): #displays score
-    global gameOn
+    global gameOn   #make sure it isnt a local variable
 
     if gameOn:
         score_text = score_font.render(str(SCORE) + ' / 5', True, ('BLACK'))    #varible to show what level user is on
-        screen.blit(score_text, (255, 10))
+        screen.blit(score_text, (255, 10))  #making sure that none of this will show if the game or varibale is set to false
 
 
 def checkFlags():   #checking whetehr to hide or show the flag
@@ -863,25 +863,25 @@ def DeleteOtherItems(): #deleting the other items from the groups, not just the 
     flags.clear()   #in case of errors
 
 
-def EndScreen(n):
+def EndScreen(number):
     global gameOn
 
-    gameOn = False
-    lose = pygame.image.load('pygameFiles\images\Pygame Crossy Road\You lose.png')
+    gameOn = False  
+    lose = pygame.image.load('pygameFiles\images\Pygame Crossy Road\you lost screen.png')   #loser screen 
     lose = pygame.transform.scale(lose, (WIDTH,HEIGHT))
 
-    win = pygame.image.load('pygameFiles\images\Pygame Crossy Road\You lose.png')
+    win = pygame.image.load('pygameFiles\images\Pygame Crossy Road\you won gif.gif')   #winner screen
     win = pygame.transform.scale(win, (WIDTH,HEIGHT))
 
-    if n == 0:
-        screen.blit(lose, (0,0))
+    if number == 0: #if number is 0 they lost
+        screen.blit(lose, (0,0))    #blitting screen
         
-    elif n == 1:
-        screen.blit(win, (0,0))
+    elif number == 1:   #if number is 1 they won
+        screen.blit(win, (0,0)) #blitting screen
         
     pygame.display.update()
     pygame.time.delay(3000)
-    GameOver(n)
+    GameOver(number)
 
 def GameOver(num):
     screen.fill((255,255,255))
@@ -893,29 +893,29 @@ def GameOver(num):
     text = MENU_FONT.render(text, 1, (0,0,0))
     xd = WIDTH//2 - (text.get_width()//2)
     screen.blit(text, (xd, 50))
-
+    #creating buttons
     Button_1 = pygame.Rect(200, 400, 100, 50)
     Button_2 = pygame.Rect(400, 400, 100, 50)
     pygame.draw.rect(screen, (255,180,0), Button_1)
     pygame.draw.rect(screen, (255,180,0), Button_2)
 
-    text1 = MENU_FONT.render("Yes", 1, (0,0,0))
-    text2 = MENU_FONT.render("No", 1, (0,0,0))
+    text1 = MENU_FONT.render("Yes", 1, (0,0,0)) #yes buttons
+    text2 = MENU_FONT.render("No", 1, (0,0,0))  #no button
     screen.blit(text1, (225, 410))
     screen.blit(text2, (425, 410))
     pygame.display.update() 
     while True:
-        for event in pygame.event.get():
+        for event in pygame.event.get():    #if player hits x on screen it leaves program
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos = pygame.mouse.get_pos()
-                mx = mousePos[0]
+                mousePos = pygame.mouse.get_pos()   #position 
+                mx = mousePos[0]    
                 my = mousePos[1]
                 if Button_1.collidepoint(mx, my):
-                    crossyRoad()
-                if Button_2.collidepoint(mx, my):
+                    crossyRoad()    #if user presses yes it restarts game
+                if Button_2.collidepoint(mx, my):   #if user presses no, go back to main menu
                     screen.fill("GREEN") # fills the screen with green
                     goodbye_text = MENU_FONT.render("Thanks for playing", 1, colors.get("BLACK")) # says thank you for playing
                     goodbye_text_X = WIDTH//2 - (goodbye_text.get_width()//2)
@@ -948,7 +948,7 @@ boom = Boom()
 
 def crossyRoad ():  #calling game function
     global flags, boom, gameOn, bg, screen_group, duck, duck_group, slow_car, fast_car, car_group, green_flag, white_flag, flag_group, flags, boom    #making all variables global so they apply everywhere
-    gameOn = True
+    gameOn = True   #control whether the player has finished the game or if it still going on
     bg = Screen()   #background screen
     screen_group = pygame.sprite.Group()
     screen_group.add(bg)    #adding bg to screen gorup
