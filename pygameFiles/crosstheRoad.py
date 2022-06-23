@@ -2,10 +2,30 @@
 #Cross the Road
 
 #imports
+from itertools import count
 import pygame 
 import time, sys
 
+ #VARIABLES
+    #declaring constants 
+WIDTH = 640
+HEIGHT = 480
+pygame.init() #helps initialize all the modules in pygame. Gives access to many functions 
+background = pygame.image.load(r'pygameFiles\\images\\Pygame Crossy Road\\road background.jpg')
+background = pygame.transform.scale (background, (WIDTH,HEIGHT))
+screen = pygame.display.set_mode((WIDTH,HEIGHT)) #setting up screen/window
+pygame.display.set_caption("Crossy Road") #setting a caption on top of the window    
+clock = pygame.time.Clock() #helps regulate the flow of the main loop 
+
+SCORE = 0
+score_font = pygame.font.SysFont('comicsans', 80, True)
+MENU_FONT=pygame.font.SysFont('comicsans',20)
+
+
+
 colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),
+
+
 "RED" : (255, 0, 0),
 "GREEN" : (0, 255, 0),
 "BLUE" : (0, 0,255),
@@ -589,6 +609,8 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "WHEAT_4" : (139, 126, 102),
 "QUARTZ" : (217, 217, 243),
 }
+gameOn = True
+
 
 class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a sprite meaning it has certain things like images
     def __init__(self): 
@@ -649,7 +671,7 @@ class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a 
     def checkCollision(self):
         car_check = pygame.sprite.spritecollide(self, car_group, False, pygame.sprite.collide_mask)
         if car_check:
-            explosion.explode(self.x, self.y)
+            boom.explode(self.x, self.y)
 
 
 class Car(pygame.sprite.Sprite): 
@@ -745,7 +767,7 @@ class Flag(pygame.sprite.Sprite):   #creating flag class
 
             if self.number == 1:    #green flag
                 white_flag.visible = True
-                if SCORE < 5:
+                if SCORE < 5:   #if the score it less than 5, the flags switch
                     SwitchLevel()   #calling function if score is less than 5
 
                 else:   #white flag
@@ -754,17 +776,17 @@ class Flag(pygame.sprite.Sprite):   #creating flag class
 
                     EndScreen(1)
 
-            else:
+            else:   #showing the opposite flag
                 green_flag.visible = True   #setting visisble
 
 
-class Explosion(object):
+class Boom(object): #object for when car and duck hit each other
     def __init__(self):
-        self.costume = 1
+        self.costume = 1    #represents costume of particular image we use
         self.width = 140
         self.height = 140
-        self.image = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')
-        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.image = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')  #uploading explosion when duck hits car
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))  #resizing image
 
     def explode(self, x, y):
         x = x - self.width / 2
@@ -773,7 +795,7 @@ class Explosion(object):
 
         while self.costume < 9:
             self.image = pygame.image.load('pygameFiles\images\Pygame Crossy Road\correct boom image.png')
-            self.image = pygame.transform.scale(self.image, (self.width, self.height))
+            self.image = pygame.transform.scale(self.image, (self.width, self.height))  
             screen.blit(self.image, (x, y))
             pygame.display.update()
 
@@ -820,10 +842,10 @@ def SwitchLevel():  #applies when going up 1 level
     SCORE += 1  #changing score by 1
 
 
-def DeleteDuck():
-    global duck
+def DeleteDuck():   #function to delete the duck
+    global duck 
 
-    duck.kill()
+    duck.kill() #removing duck object from groups
     screen_group.draw(screen)
     car_group.draw(screen)
     flag_group.draw(screen)
@@ -835,10 +857,10 @@ def DeleteDuck():
     pygame.display.update()
 
 
-def DeleteOtherItems():
+def DeleteOtherItems(): #deleting the other items from the groups, not just the duck
     car_group.empty()
     flag_group.empty()
-    flags.clear()
+    flags.clear()   #in case of errors
 
 
 def EndScreen(n):
@@ -864,9 +886,9 @@ def EndScreen(n):
 def GameOver(num):
     screen.fill((255,255,255))
     if num == 0:
-        text = "you lost the Game do you want to play again"
+        text = "You lost the Game 😞 Do you want to play again?"
     if num == 1:
-        text = "you won the Game do you want to play again"
+        text = "Congradulations, you won the Game 😃🦆!! Do you want to play again"
     
     text = MENU_FONT.render(text, 1, (0,0,0))
     xd = WIDTH//2 - (text.get_width()//2)
@@ -892,26 +914,16 @@ def GameOver(num):
                 mx = mousePos[0]
                 my = mousePos[1]
                 if Button_1.collidepoint(mx, my):
-                    return True
+                    crossyRoad()
                 if Button_2.collidepoint(mx, my):
+                    screen.fill("GREEN") # fills the screen with green
+                    goodbye_text = MENU_FONT.render("Thanks for playing", 1, colors.get("BLACK")) # says thank you for playing
+                    goodbye_text_X = WIDTH//2 - (goodbye_text.get_width()//2)
+                    screen.blit(goodbye_text, (goodbye_text_X, 350))
                     return False
+                    # menu()
 
-
-#VARIABLES
-#declaring constants 
-WIDTH = 640
-HEIGHT = 480
-pygame.init() #helps initialize all the modules in pygame. Gives access to many functions 
-background = pygame.image.load(r'pygameFiles\\images\\Pygame Crossy Road\\road background.jpg')
-background = pygame.transform.scale (background, (WIDTH,HEIGHT))
-screen = pygame.display.set_mode((WIDTH,HEIGHT)) #setting up screen/window
-pygame.display.set_caption("Crossy Road") #setting a caption on top of the window    
-clock = pygame.time.Clock() #helps regulate the flow of the main loop 
-
-SCORE = 0
-score_font = pygame.font.SysFont('comicsans', 80, True)
-MENU_FONT=pygame.font.SysFont('comicsans',20)
-
+#Need these varibales here to reference them before crossyRoad() if not there the variables wont be defined for the classes 
 bg = Screen()   #background screen
 screen_group = pygame.sprite.Group()
 screen_group.add(bg)    #adding bg to screen gorup
@@ -932,35 +944,59 @@ white_flag = Flag(2)
 flag_group = pygame.sprite.Group()
 flag_group.add(green_flag, white_flag)
 flags = [green_flag, white_flag]    #creating a list to help hiding and showing flags
+boom = Boom()
 
-explosion = Explosion()
+def crossyRoad ():  #calling game function
+    global flags, boom, gameOn, bg, screen_group, duck, duck_group, slow_car, fast_car, car_group, green_flag, white_flag, flag_group, flags, boom    #making all variables global so they apply everywhere
+    gameOn = True
+    bg = Screen()   #background screen
+    screen_group = pygame.sprite.Group()
+    screen_group.add(bg)    #adding bg to screen gorup
 
-gameOn = True
+    #duck objects
+    duck = Duck()
+    duck_group = pygame.sprite.Group() #to hold both in place
+    duck_group.add(duck)
 
-#MAIN LOOP
-run = True 
-while run:
-    clock.tick(60)  #entering a framerate of 60 frames per second 
-    for event in pygame.event.get():    #when player wanst to close window the game ends
-        if event.type == pygame.QUIT:
-            run = False     #exiting main loop
-    # screen.fill(0,225,0) #filling screen with green background
-    screen_group.draw(screen)
+    #car objects
+    slow_car = Car(1)
+    fast_car = Car(2)
+    car_group = pygame.sprite.Group()
+    car_group.add(slow_car, fast_car)
 
-    #calling fucntions
-    ScoreDisplay()
-    checkFlags()
+    green_flag = Flag(1)
+    white_flag = Flag(2)
+    flag_group = pygame.sprite.Group()
+    flag_group.add(green_flag, white_flag)
+    flags = [green_flag, white_flag]    #creating a list to help hiding and showing flags
 
-    car_group.draw(screen)
-    duck_group.draw(screen)
-    flag_group.draw(screen)
-    #need these to be constantly updating 
-    car_group.update()
-    duck_group.update()
-    flag_group.update()
+    boom = Boom()
+    
 
-    screen_group.update()
+    #MAIN LOOP
+    run = True 
+    while run:
+        clock.tick(60)  #entering a framerate of 60 frames per second 
+        for event in pygame.event.get():    #when player wanst to close window the game ends
+            if event.type == pygame.QUIT:
+                run = False     #exiting main loop
+        # screen.fill(0,225,0) #filling screen with green background
+        screen_group.draw(screen)
+        #calling fucntions
+        ScoreDisplay()
+        checkFlags()
 
-    pygame.display.update() #updating screen so user can see changes added
+        car_group.draw(screen)
+        duck_group.draw(screen)
+        flag_group.draw(screen)
+        #need these to be constantly updating 
+        car_group.update()
+        duck_group.update()
+        flag_group.update()
+
+        screen_group.update()
+
+        pygame.display.update() #updating screen so user can see changes added
+crossyRoad()
 
 pygame.quit() #making pygame window close
