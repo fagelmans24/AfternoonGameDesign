@@ -1,6 +1,6 @@
 #Susie Fagelman
 #Crossy Road
-#Reference to Crossy Road  | Python Pygame Tutorial! | Just Finished Coding! – YouTube
+#Reference =  | Python Pygame Tutorial! | Just Finished Coding! – YouTube
 
 #imports
 from itertools import count
@@ -612,7 +612,7 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 gameOn = True
 
 
-class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a sprite meaning it has certain things like images
+class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a sprite meaning it has certain things like images    #referenced this class
     def __init__(self): 
         super().__init__()  #this makes sure that the sprites work properly
         #duck attributes:
@@ -674,7 +674,7 @@ class Duck(pygame.sprite.Sprite):   #these are the inheretants #the object is a 
             boom.explode(self.x, self.y)
 
 
-class Car(pygame.sprite.Sprite): 
+class Car(pygame.sprite.Sprite):    #referenced this class
     def __init__(self, number):
         super().__init__()
         if number == 1: #correspodning to the slow car
@@ -710,7 +710,7 @@ class Car(pygame.sprite.Sprite):
             self.vel *= -1  #determines direction of car
 
 
-class Screen(pygame.sprite.Sprite): #creating class screen
+class Screen(pygame.sprite.Sprite): #creating class screen  #referenced this class
     def __init__(self):
         super().__init__()
         #setting up images
@@ -733,7 +733,7 @@ class Screen(pygame.sprite.Sprite): #creating class screen
         self.rect.topleft = (self.x, self.y)    #top left corner
 
 
-class Flag(pygame.sprite.Sprite):   #creating flag class
+class Flag(pygame.sprite.Sprite):   #creating flag class    #referenced this class
     def __init__(self, number): 
         super().__init__()
         self.number = number    #setting up attribute
@@ -780,7 +780,7 @@ class Flag(pygame.sprite.Sprite):   #creating flag class
                 green_flag.visible = True   #setting visisble
 
 
-class Boom(object): #object for when car and duck hit each other
+class Boom(object): #object for when car and duck hit each other    #referenced this class
     def __init__(self):
         self.costume = 1    #represents costume of particular image we use
         self.width = 140
@@ -1024,7 +1024,7 @@ buttoncolor= colors.get ("BLACK")
 
 #menu function
 def menu():
-    Title = TITLE_FONT.render("Crossy Road", 1, colors.get("blue"))
+    Title = TITLE_FONT.render("Cross that Road!", 1, colors.get("blue"))
     screen.fill(backgrnd)
     ymenu = 155
     xd = WIDTH//2 - (Title.get_width()//2) #centering title
@@ -1107,7 +1107,7 @@ def Instructions(TITLE, FILE):
                       
 def settings ():    #settings funtion
     global WIDTH, HEIGHT, backgrnd, screen, buttoncolor #setting global so they apply to all
-    Title = TITLE_FONT.render("Crossy Road Settings", 1, colors.get("BLACK"))
+    Title = TITLE_FONT.render("Cross that Road Settings", 1, colors.get("BLACK"))
     screen.fill(backgrnd)
     ymenu = 155
     xd = WIDTH//2 - (Title.get_width()//2)
