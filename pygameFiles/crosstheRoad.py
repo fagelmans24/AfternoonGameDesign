@@ -1,5 +1,6 @@
 #Susie Fagelman
-#Cross the Road
+#Crossy Road
+#Reference to Crossy Road  | Python Pygame Tutorial! | Just Finished Coding! – YouTube
 
 #imports
 from itertools import count
@@ -885,9 +886,9 @@ def EndScreen(number):
 
 def GameOver(num):
     screen.fill((255,255,255))
-    if num == 0:
+    if num == 0:    #if the user lost
         text = "You lost the Game :( Do you want to play again?"
-    if num == 1:
+    if num == 1:    #if the user won
         text = "Congradulations, you won the Game 😃🦆!! Do you want to play again"
     
     text = MENU_FONT.render(text, 1, (0,0,0))
@@ -904,13 +905,13 @@ def GameOver(num):
     screen.blit(text1, (225, 410))
     screen.blit(text2, (425, 410))
     pygame.display.update() 
-
+    #creating score
     date = datetime.datetime.now()
-    scoreLn=str(str(SCORE*20) +"    " + user_name +"    " +date.strftime("%m/%d/%y") + "\n")    #adds an enter
+    scoreLn=str(str(SCORE*20) +"    " + user_name +"    " +date.strftime("%m/%d/%y") + "\n")    #score, username, month, day, year #\n adds an enter
     myFile = open("pygameFiles\images\Pygame Crossy Road\scoreFile.txt", "a")
     myFile.write (scoreLn)
     myFile.close()
-    while True:
+    while True: #loop for x button
         for event in pygame.event.get():    #if player hits x on screen it leaves program
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -952,17 +953,16 @@ flags = [green_flag, white_flag]    #creating a list to help hiding and showing 
 boom = Boom()
 TITLE_FONT = pygame.font.SysFont('comicsans', 40)
 MENU_FONT = pygame.font.SysFont('comicsans', 20)
-message = ["Instructions", "Setting", "Game 1", "Scoreboard", "Exit"]
+message = ["Instructions", "Setting", "Game 1", "Scoreboard", "Exit"]   #list of elements on menu to reference
 
 backgrnd = (255,255,255)
 
-def input_name():
-    global user_name
+def input_name():   
+    global user_name    #making it apply everywhere
     # name variable
     user_name = ""
 
     #rendering text objects
-
     Title = TITLE_FONT.render("Input your name:", 1, colors.get("MANDARIN_ORANGE"))
     text1 = MENU_FONT.render("(Enter in the pink box)", 1, colors.get("SALMON"))
     user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
@@ -1160,7 +1160,7 @@ def settings ():    #settings funtion
             settings()  #calling function
                 
                 
-def crossyRoad ():  #calling game function
+def crossyRoad ():  #defining game function
     global flags, boom, gameOn, bg, screen_group, duck, duck_group, slow_car, fast_car, car_group, green_flag, white_flag, flag_group, flags, boom    #making all variables global so they apply everywhere
     gameOn = True   #control whether the player has finished the game or if it still going on
     bg = Screen()   #background screen
