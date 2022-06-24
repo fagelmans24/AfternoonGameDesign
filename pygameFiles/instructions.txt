@@ -1,6 +1,7 @@
 Welcomes to Crossy Road! In this game 
 we need to use the arrow keys (up, down, left, and right)
 to move the duck across the road without getting
-hit by the car. There are 5 different levels. To complete a level  to move the square
-To move the circle use W,A,S and D
-Press x to go back to menu 
+hit by the cars. There are 5 different levels. To complete a level 
+you must successfully cross the road to the green flag and back 
+to the white flag. If you complete all 5 levels you win!
+Good luck! 

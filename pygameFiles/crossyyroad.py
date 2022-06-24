@@ -811,7 +811,7 @@ def ScoreDisplay(): #displays score
 
     if gameOn:
         score_text = score_font.render(str(SCORE) + ' / 5', True, ('BLACK'))    #varible to show what level user is on
-        screen.blit(score_text, (240, 10))  #making sure that none of this will show if the game or varibale is set to false
+        screen.blit(score_text, (255, 10))  #making sure that none of this will show if the game or varibale is set to false
 
 
 def checkFlags():   #checking whetehr to hide or show the flag
@@ -886,7 +886,7 @@ def EndScreen(number):
 def GameOver(num):
     screen.fill((255,255,255))
     if num == 0:
-        text = "You lost the Game :( Do you want to play again?"
+        text = "You lost the Game 😞 Do you want to play again?"
     if num == 1:
         text = "Congradulations, you won the Game 😃🦆!! Do you want to play again"
     
@@ -906,8 +906,8 @@ def GameOver(num):
     pygame.display.update() 
 
     date = datetime.datetime.now()
-    scoreLn=str(str(SCORE*20) +"    " + user_name +"    " +date.strftime("%m/%d/%y") + "\n")    #adds an enter
-    myFile = open("pygameFiles\images\Pygame Crossy Road\scoreFile.txt", "a")
+    scoreLn=str(SCORE) +"    " + user_name +"    " +date.strftime("%m/%d/%y") + "\n"    #adds an enter
+    myFile = open("scoreFile.txt", "a")
     myFile.write (scoreLn)
     myFile.close()
     while True:
@@ -1024,7 +1024,7 @@ buttoncolor= colors.get ("BLACK")
 
 #menu function
 def menu():
-    Title = TITLE_FONT.render("Crossy Road", 1, colors.get("blue"))
+    Title = TITLE_FONT.render("Crossy Road", 1, colors.get(""))
     screen.fill(backgrnd)
     ymenu = 155
     xd = WIDTH//2 - (Title.get_width()//2) #centering title
@@ -1073,7 +1073,7 @@ def menu():
 
 def Instructions(TITLE, FILE):
     #rendering text objects
-    Title = TITLE_FONT.render(TITLE, 1, colors.get("DEEP_PINK,"))
+    Title = TITLE_FONT.render(TITLE, 1, colors.get("blue"))
     
     #fills screen with white
     screen.fill(backgrnd)
@@ -1085,7 +1085,7 @@ def Instructions(TITLE, FILE):
     #variable to control change of line
     yinstructions = 150
     for line in content:
-        Instruc = MENU_FONT.render(line[0:-1], 1, colors.get("OLIVE"))
+        Instruc = MENU_FONT.render(line[0:-1], 1, colors.get("blue"))
         screen.blit(Instruc, (40, yinstructions))
         pygame.display.update()
         pygame.time.delay(50)
@@ -1107,11 +1107,11 @@ def Instructions(TITLE, FILE):
                       
 def settings ():    #settings funtion
     global WIDTH, HEIGHT, backgrnd, screen, buttoncolor #setting global so they apply to all
-    Title = TITLE_FONT.render("Crossy Road Settings", 1, colors.get("BLACK"))
+    Title = TITLE_FONT.render("Crossy Road", 1, colors.get("MINT_CREAM"))
     screen.fill(backgrnd)
     ymenu = 155
     xd = WIDTH//2 - (Title.get_width()//2)
-    screen.blit(Title, (xd, 80))
+    screen.blit(Title, (xd, 100))
     
     Bx= WIDTH//3
     #setting buttons
@@ -1146,8 +1146,7 @@ def settings ():    #settings funtion
                 mx=mousepos[0]
                 my=mousepos[1]
                 if Button_Color.collidepoint(mx,my):
-                    buttoncolor=(random.randint(0,255),random.randint(0,255), random.randint(0,255)) #changes color
-                    
+                    buttoncolor=(random.randint(0,255),random.randint(0,255), random.randint(0,255)) #changes color                   
                 if Button_Background.collidepoint(mx,my):
                     backgrnd=(random.randint(0,255),random.randint(0,255), random.randint(0,255))   #changes background color
                 if Button_Sizeincrease.collidepoint(mx, my):
@@ -1213,3 +1212,5 @@ def crossyRoad ():  #calling game function
         pygame.display.update() #updating screen so user can see changes added
 input_name()
 menu()
+
+

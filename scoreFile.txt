@@ -2,3 +2,12 @@
 0    susie    06/23/22
 0    susie    06/23/22
 0    susie    06/23/22
+0    Susie    06/23/22
+4    Susie    06/23/22
+0    kate    06/23/22
+0    kate    06/23/22
+1    kate    06/23/22
+0    susie    06/23/22
+0    susie    06/24/22
+0    susie    06/24/22
+0    susie    06/24/22
